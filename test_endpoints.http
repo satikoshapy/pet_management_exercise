@@ -1,0 +1,104 @@
+# Reset
+PATCH http://localhost:8080/pets/reset
+
+###
+
+# Create three pets
+POST http://localhost:8080/pets
+Content-Type: application/json
+
+{
+  "name": "Buddy",
+  "type": "dog"
+}
+
+###
+
+POST http://localhost:8080/pets
+Content-Type: application/json
+
+{
+  "name": "Whiskers",
+  "type": "cat"
+}
+
+###
+
+POST http://localhost:8080/pets
+Content-Type: application/json
+
+{
+  "name": "Fluffy",
+  "type": "cat"
+}
+
+###
+
+# Play with the first pet (Buddy, ID = 1)
+POST http://localhost:8080/pets/1/play
+
+###
+
+# Feed the first pet (Buddy) with dogFood
+POST http://localhost:8080/pets/1/feed?foodType=dogFood
+
+###
+
+# Feed the first pet (Buddy) with dogFood
+POST http://localhost:8080/pets/1/feed?foodType=dogFood
+
+###
+
+# Feed the first pet (Buddy) with dogFood
+POST http://localhost:8080/pets/1/feed?foodType=dogFood
+
+###
+
+# Play with the second pet (Whiskers, ID = 2)
+POST http://localhost:8080/pets/2/play
+
+###
+
+# Feed the second pet (Whiskers) with catFood
+POST http://localhost:8080/pets/2/feed?foodType=catFood
+
+###
+
+POST http://localhost:8080/pets/2/feed?foodType=catFood
+
+###
+
+POST http://localhost:8080/pets/2/feed?foodType=catFood
+
+###
+
+# Add allergy (chicken) to the second pet (Whiskers, ID = 2)
+PUT http://localhost:8080/pets/2/allergies/chicken
+
+###
+
+# Try feeding second pet (Whiskers) with chicken (should trigger WrongFoodException)
+POST http://localhost:8080/pets/2/feed?foodType=chicken
+
+###
+
+# Play with the third pet (Fluffy, ID = 3)
+POST http://localhost:8080/pets/3/play
+
+###
+
+POST http://localhost:8080/pets/3/play
+
+###
+
+POST http://localhost:8080/pets/3/play
+
+###
+
+# Get all energetic pets (energy > 50)
+GET http://localhost:8080/pets/energetic
+
+###
+
+# Get all hungry pets (hunger level above certain threshold)
+GET http://localhost:8080/pets/hungry
