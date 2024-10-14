@@ -5,7 +5,7 @@
 In deze oefening gaan we een  **Pet Management System** bouwen met behulp van **Spring Boot**. 
 Het systeem biedt een reeks REST endpoints waarmee je virtuele huisdieren kan verzorgen.
 Je kunt een huisdier aanmaken, met het huisdier spelen, het voeden en de status opvragen. 
-Daarnaast leer je over **validatie**, **exception handling**, de **Java Streaming API** en het schrijven van **unit tests**.
+Daarnaast leer je over **validatie**, **exception handling**, de **Java Stream API** en het schrijven van **unit tests**.
 
 ### Functionaliteiten
 
@@ -29,8 +29,8 @@ Daarnaast leren we hoe we **exceptions** kunnen afhandelen. Spring Boot maakt he
 - **PetTooTiredException**: Een checked exception die gegooid wordt als een huisdier te moe is om te spelen.
 - **WrongFoodException**: Een unchecked exception die gegooid wordt als het huisdier allergisch is voor het voedsel.
 
-### 2. Java Streaming API
-De Streaming API in Java maakt het eenvoudig om complexe bewerkingen op collecties uit te voeren, zoals filteren en transformeren. In deze oefening gebruiken we de Streaming API om een lijst van huisdieren te filteren en te transformeren.
+### 2. Java Stream API
+De Stream API in Java maakt het eenvoudig om complexe bewerkingen op collecties uit te voeren, zoals filteren en transformeren. In deze oefening gebruiken we de Stream API om een lijst van huisdieren te filteren en te transformeren.
 
 ```
 List<Student> students = Arrays.asList(
