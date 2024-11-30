@@ -1,6 +1,11 @@
 package be.pxl.pets.service;
 
+import be.pxl.pets.domain.Hunger;
 import be.pxl.pets.domain.Pet;
+import be.pxl.pets.exceptions.PetNotFoundException;
+import be.pxl.pets.exceptions.PetTooHungryException;
+import be.pxl.pets.exceptions.PetTooTiredException;
+import be.pxl.pets.exceptions.WrongFoodException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,36 +32,48 @@ public class PetService {
         return pets.get(id);
     }
 
-    public void playWithPet(Long petId)  {
+    public void playWithPet(Long petId) throws PetNotFoundException, PetTooTiredException, PetTooHungryException {
         Pet pet = findPet(petId);
-        // TODO throw PetNotFoundException if pet not found
-        //  call pet.play
+        if (pet == null) {
+            throw new PetNotFoundException();
+        }
+        pet.play();
+
     }
 
-    public void feedPet(Long petId, String foodType) {
+    public void feedPet(Long petId, String foodType) throws PetNotFoundException, WrongFoodException {
         Pet pet = findPet(petId);
-        // TODO throw PetNotFoundException if pet not found
-        //  call pet.feed
+        if (pet == null) {
+            throw new PetNotFoundException();
+        }
+        pet.feed(foodType);
+
     }
 
     public List<Pet> getEnergeticPets() {
-        // TODO return all the pets having energy 50 or more. Use the Java streaming API and lambda expressions.
-        return null;
+
+        return pets.entrySet().stream()
+                .peek(entry -> entry.getValue().setId(entry.getKey())) .map(Map.Entry::getValue)
+                .filter(pet -> pet.getEnergy() >= 50).collect(Collectors.toList());
     }
 
     public List<String> getHungryPets() {
-        // TODO return a list with the names of the hungry pets (BIT_HUNGRY AND VERY_HUNGRY)
-        return null;
+
+        return pets.values().stream().filter(pet -> pet.getHunger() != Hunger.SATISFIED)
+                .map(Pet::getName).collect(Collectors.toList());
     }
 
     public void addAllergy(Long petId, String allergy) {
         Pet pet = findPet(petId);
-        // TODO throw PetNotFoundException if pet not found
-        //  add the allergy to the pet's allergies
+        if (pet == null) {
+            throw new PetNotFoundException();
+        }
+        pet.getFoodAllergies().add(allergy);
+
     }
 
     public List<Pet> findAllPets() {
-        // TODO return all the pets
+
         return pets.entrySet().stream()
                 .peek(entry -> entry.getValue().setId(entry.getKey()))
                 .map(Map.Entry::getValue)
@@ -67,4 +84,6 @@ public class PetService {
         pets = new HashMap<>();
         currentId = 1L;
     }
+
+
 }
