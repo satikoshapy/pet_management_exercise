@@ -1,13 +1,10 @@
 package be.pxl.pets.api;
 
+import be.pxl.pets.api.request.PetCreateRequest;
 import be.pxl.pets.domain.Pet;
 import be.pxl.pets.service.PetService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,11 @@ public class PetController {
 
     // TODO implement a REST endpoint to create a new pet. You receive a requestbody of type PetCreateRequest.
     //  The name of the new pet should have at least 2 characters. The type is mandatory.
+
+    @PostMapping
+    public Pet createPet(@Valid @RequestBody PetCreateRequest pet) {
+        return petService.createPet(pet.getName(), pet.getType());
+    }
 
     @GetMapping
     public List<Pet> findAllPets() {

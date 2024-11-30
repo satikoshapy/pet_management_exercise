@@ -3,9 +3,11 @@ package be.pxl.pets.service;
 import be.pxl.pets.domain.Pet;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class PetService {
@@ -55,7 +57,10 @@ public class PetService {
 
     public List<Pet> findAllPets() {
         // TODO return all the pets
-        return null;
+        return pets.entrySet().stream()
+                .peek(entry -> entry.getValue().setId(entry.getKey()))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
     }
 
     public void reset() {
