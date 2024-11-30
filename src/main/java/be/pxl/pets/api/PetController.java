@@ -4,6 +4,7 @@ import be.pxl.pets.api.request.PetCreateRequest;
 import be.pxl.pets.domain.Pet;
 import be.pxl.pets.service.PetService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class PetController {
 
     private final PetService petService;
 
+
     public PetController(PetService petService) {
         this.petService = petService;
     }
@@ -22,6 +24,7 @@ public class PetController {
     //  The name of the new pet should have at least 2 characters. The type is mandatory.
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Pet createPet(@Valid @RequestBody PetCreateRequest pet) {
         return petService.createPet(pet.getName(), pet.getType());
     }

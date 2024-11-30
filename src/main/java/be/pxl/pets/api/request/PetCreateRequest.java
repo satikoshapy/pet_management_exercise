@@ -2,10 +2,10 @@ package be.pxl.pets.api.request;
 import jakarta.validation.constraints.*;
 
 public class PetCreateRequest {
-	@NotNull(message = "Name cannot be null")
+	@NotBlank(message = "Name cannot be empty")
 	@Size(min = 2, max = 30, message = "Name must be between 2 and 30 characters")
 	private String name;
-	@NotNull(message = "Type cannot be null")
+	@NotBlank(message = "Type cannot be blank")
 	private String type;
 
 	public String getName() {
