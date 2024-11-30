@@ -54,7 +54,7 @@ public class Pet {
     }
 
     public void feed(String foodType) throws WrongFoodException {
-        // TODO throw a WrongFoodException if the pet is allergic to the given foodType
+
         if (foodAllergies.contains(foodType)) {
             throw new WrongFoodException();
         }

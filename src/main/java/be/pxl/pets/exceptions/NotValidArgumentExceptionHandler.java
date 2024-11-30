@@ -22,5 +22,29 @@ public class NotValidArgumentExceptionHandler {
         }
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(PetNotFoundException.class)
+    public ResponseEntity<String> handlePetNotFoundExceptions(PetNotFoundException ex) {
+
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PetTooHungryException.class)
+    public ResponseEntity<String> handlePetTooHungryExceptions(PetTooHungryException ex) {
+
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PetTooTiredException.class)
+    public ResponseEntity<String> handlePetTooTiredExceptions(PetTooTiredException ex) {
+
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(WrongFoodException.class)
+    public ResponseEntity<String> handleWrongFoodExceptions(WrongFoodException ex) {
+
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
 

@@ -25,9 +25,6 @@ public class PetController {
         this.petService = petService;
     }
 
-    // TODO implement a REST endpoint to create a new pet. You receive a requestbody of type PetCreateRequest.
-    //  The name of the new pet should have at least 2 characters. The type is mandatory.
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pet createPet(@Valid @RequestBody PetCreateRequest pet) {
@@ -45,23 +42,20 @@ public class PetController {
     }
 
     @PostMapping("/{id}/play")
-    public void playWithPet(@PathVariable Long id) throws PetNotFoundException, PetTooHungryException, PetTooTiredException {
+    public Pet playWithPet(@PathVariable Long id) throws PetNotFoundException, PetTooHungryException, PetTooTiredException {
         petService.playWithPet(id);
+        return petService.findPet(id);
     }
 
-    // TODO Create the endpoint
-    //  POST /pets/{petId}/feed?foodType={foodType}
-    //  to feed the given foodType to the pet with the given id.
-    //  the foodType is required
 
-    @PostMapping("/{id}/feed?foodType={foodType}")
-    public void feedPet(@PathVariable Long id, @PathVariable String foodType) throws WrongFoodException, PetNotFoundException {
+    @PostMapping("/{id}/feed")
+    public Pet feedPet(
+            @PathVariable Long id,
+            @RequestParam String foodType) throws WrongFoodException, PetNotFoundException {
         petService.feedPet(id, foodType);
+        return petService.findPet(id);
     }
 
-    // TODO Create the endpoint
-    //  PUT /pets/{petId}/allergies/{foodType}
-    //  to add an allergy to a pet. Return accepted if the allergy is added correctly.
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("/{petId}/allergies/{foodType}")
